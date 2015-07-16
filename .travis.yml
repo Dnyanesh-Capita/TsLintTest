@@ -8,7 +8,6 @@ cache:
   directories:
     - node_modules
 before_install:
- - chmod u+x *.sh
  - npm install npm@latest -g
 install:
  - echo $COMMIT_MESSAGE
