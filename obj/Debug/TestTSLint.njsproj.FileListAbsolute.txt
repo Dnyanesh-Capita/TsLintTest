@@ -1,0 +1,2 @@
+C:\TestTSLint\TestTSLint\obj\Debug\TestTSLint.njsprojResolveAssemblyReference.cache
+C:\TestTSLint\TestTSLint\bin\Microsoft.NodejsTools.WebRole.dll

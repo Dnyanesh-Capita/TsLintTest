@@ -1,0 +1,37 @@
+language: node_js
+node_js:
+  - "0.10"
+env:
+  - NODE_ENV=travis
+branches:
+  except:
+    - /-nobuild$/
+    - /^(?i:1.0.0-alpha).*$/
+cache:
+  directories:
+    - node_modules
+services:
+  - mongodb
+#  - neo4j
+  - rabbitmq
+notifications:
+
+  slack:
+    rooms:
+      - ccs-alice:TRbqOSe43AZv81fbIpdX5pLv#travis
+    on_success: never
+before_install:
+ - chmod u+x *.sh
+ - export COMMIT_MESSAGE=$(git show -s --format=%B $TRAVIS_COMMIT | tr -d '\n')
+ - export REPOSITORY_NAME=$(echo $TRAVIS_REPO_SLUG | gawk -F/ '{print $2}')
+ - npm install npm@latest -g
+install:
+ - echo $COMMIT_MESSAGE
+ - npm install
+ - npm install -g gulp
+ - npm install -g mocha
+ - npm install -g shrinkwrap
+ - gulp bundle
+ - cd _release
+ - npm install --production
+ - npm shrinkwrap
